@@ -1,1 +1,3 @@
-import Library from './js/some';
+import home from './home/home'
+
+home.render()
