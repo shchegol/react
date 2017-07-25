@@ -1,0 +1,1 @@
+import Library from './js/some';
