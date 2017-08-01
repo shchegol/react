@@ -6,38 +6,6 @@ export default {
     start() {
         const location = document.body;
 
-        // function tick() {
-        //
-        //     const element = (
-        //         <div>
-        //             <h1>Hello, world!</h1>
-        //             <h2>It is {new Date().toLocaleTimeString()}.</h2>
-        //         </div>
-        //     );
-        //
-        //     ReactDOM.render(
-        //         element, location
-        //     )
-        // }
-
-        // function Clock(props) {
-        //     return (
-        //         <div>
-        //             <h1>Hello, world!</h1>
-        //             <h2>
-        //                 It is {props.date.toLocaleTimeString()}.
-        //             </h2>
-        //         </div>
-        //     );
-        // }
-        //
-        // function tick() {
-        //     ReactDOM.render(
-        //         <Clock date={new Date()}/>,
-        //         location
-        //     );
-        // }
-
         class Clock extends React.Component {
             constructor(props) {
                 super(props);
@@ -63,16 +31,46 @@ export default {
 
             render() {
                 return (
+                    <h1>Current time: {this.state.date.toLocaleTimeString()}</h1>
+                )
+            }
+        }
+
+        class Toggle extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {isToggleOn: true};
+                this.handleClick = this.handleClick.bind(this);
+            }
+
+            handleClick() {
+                this.setState(prevState => ({
+                    isToggleOn: !prevState.isToggleOn
+                }))
+            }
+
+            render() {
+                return (
+                    <button onClick={this.handleClick}>
+                        {this.state.isToggleOn ? 'ON' : 'OFF'}
+                    </button>
+                )
+            }
+        }
+
+        class App extends React.Component {
+            render() {
+                return (
                     <div>
-                        <h1>Hello, world!</h1>
-                        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                        <Clock/>
+                        <Toggle/>
                     </div>
                 )
             }
         }
 
         ReactDOM.render(
-            <Clock/>,
+            <App/>,
             location
         );
 
