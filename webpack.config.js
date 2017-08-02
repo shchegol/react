@@ -18,6 +18,15 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(html)$/,
+                use: {
+                    loader: 'html-loader',
+                    options: {
+                        attrs: [':data-src']
+                    }
+                }
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
@@ -57,7 +66,8 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: 'React'
+            title: 'React',
+            template: 'index.ejs'
         }),
         new webpack.HotModuleReplacementPlugin()
     ],

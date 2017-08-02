@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 export default {
 
     start() {
-        const location = document.body;
+        const location = document.getElementById('root');
 
         class Clock extends React.Component {
             constructor(props) {
