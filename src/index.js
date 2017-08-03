@@ -1,3 +1,3 @@
-import home from './home/home'
+import home from './containers/Home/Home'
 
 home.start();

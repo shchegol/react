@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ToggleButton from './components/ToggleButton/ToggleButton.js';
 
 export default {
 
@@ -36,34 +37,16 @@ export default {
             }
         }
 
-        class Toggle extends React.Component {
-            constructor(props) {
-                super(props);
-                this.state = {isToggleOn: true};
-                this.handleClick = this.handleClick.bind(this);
-            }
-
-            handleClick() {
-                this.setState(prevState => ({
-                    isToggleOn: !prevState.isToggleOn
-                }))
-            }
-
-            render() {
-                return (
-                    <button onClick={this.handleClick}>
-                        {this.state.isToggleOn ? 'ON' : 'OFF'}
-                    </button>
-                )
-            }
-        }
-
         class App extends React.Component {
             render() {
                 return (
-                    <div>
-                        <Clock/>
-                        <Toggle/>
+                    <div className="container">
+                        <div>
+                            <ToggleButton/>
+                        </div>
+                        <div>
+                            <Clock/>
+                        </div>
                     </div>
                 )
             }
