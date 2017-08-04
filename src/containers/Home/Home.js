@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ToggleButton from './components/ToggleButton/ToggleButton.js';
+import ToggleButton from '../../components/ToggleButton/ToggleButton.js';
 
 export default {
 

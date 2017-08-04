@@ -2,13 +2,14 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     devtool: 'inline-source-map',
 
     context: path.resolve(__dirname, './src'),
     entry: {
-        app: './index.js'
+        app: ['bootstrap-loader', './index.js']
     },
     output: {
         filename: '[name].bundle.js',
@@ -38,28 +39,23 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
-            },
-            {
-                test: /\.scss$/,
-                use: [{
-                    loader: "style-loader" // creates style nodes from JS strings
-                }, {
-                    loader: "css-loader" // translates CSS into CommonJS
-                }, {
-                    loader: "sass-loader" // compiles Sass to CSS
-                }]
-            },
-            {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
                     'file-loader'
                 ]
-            }
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract(
+                    'style-loader',
+                    'css-loader?modules&importLoaders=2&localIdentName=[name]__[local]__[hash:base64:5]' +
+                    '!sass-loader' +
+                    '!sass-resources-loader'
+                ),
+            },
+            {test: /\.css$/, use: ['style-loader', 'css-loader']},
+            // {test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader', 'sass-resources-loader']},
+            {test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, use: 'imports-loader?jQuery=jquery'}
         ]
     },
 

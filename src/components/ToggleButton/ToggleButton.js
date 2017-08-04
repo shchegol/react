@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Button} from 'react-bootstrap';
 
 export default class ToggleButton extends Component {
     constructor(props) {
@@ -15,9 +16,11 @@ export default class ToggleButton extends Component {
 
     render() {
         return (
-            <button onClick={this.handleClick} className="btn">
-                {this.state.isToggleOn ? 'ON' : 'OFF'}
-            </button>
+            <div>
+                <Button bsStyle="primary" onClick={this.handleClick}>
+                    {this.state.isToggleOn ? 'ON' : 'OFF'}
+                </Button>
+            </div>
         )
     }
 }
