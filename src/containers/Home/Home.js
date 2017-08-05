@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ToggleButton from '../../components/ToggleButton/ToggleButton.js';
+import {Grid, Row, Col} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default {
 
@@ -17,7 +19,7 @@ export default {
                 this.timerID = setInterval(
                     () => this.tick(),
                     1000
-                )
+                );
             }
 
             componentWillUnmount() {
@@ -40,14 +42,16 @@ export default {
         class App extends React.Component {
             render() {
                 return (
-                    <div className="container">
-                        <div>
-                            <ToggleButton/>
-                        </div>
-                        <div>
-                            <Clock/>
-                        </div>
-                    </div>
+                    <Grid>
+                        <Row>
+                            <Col xs={12}>
+                                <ToggleButton/>
+                            </Col>
+                            <Col xs={12}>
+                                <Clock/>
+                            </Col>
+                        </Row>
+                    </Grid>
                 )
             }
         }

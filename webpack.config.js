@@ -2,19 +2,24 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     devtool: 'inline-source-map',
 
     context: path.resolve(__dirname, './src'),
     entry: {
-        app: ['bootstrap-loader', './index.js']
+        app: './index.js'
     },
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    // resolve: {
+    //     modules: [
+    //         path.join(__dirname, "src"),
+    //         "node_modules"
+    //     ]
+    // },
 
     module: {
         rules: [
@@ -39,23 +44,16 @@ module.exports = {
                 }
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
+                test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: 'url-loader?limit=10000',
             },
             {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract(
-                    'style-loader',
-                    'css-loader?modules&importLoaders=2&localIdentName=[name]__[local]__[hash:base64:5]' +
-                    '!sass-loader' +
-                    '!sass-resources-loader'
-                ),
+                test: /\.(ttf|eot)(\?[\s\S]+)?$/,
+                use: 'file-loader',
             },
+            {test: /\.(png|svg|jpg|gif)$/, use: ['file-loader']},
             {test: /\.css$/, use: ['style-loader', 'css-loader']},
-            // {test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader', 'sass-resources-loader']},
-            {test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, use: 'imports-loader?jQuery=jquery'}
+            {test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader']}
         ]
     },
 
@@ -65,7 +63,11 @@ module.exports = {
             title: 'React',
             template: 'index.ejs'
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        }),
     ],
 
     devServer: {
