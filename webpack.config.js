@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     devtool: 'inline-source-map',
@@ -14,12 +15,6 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
-    // resolve: {
-    //     modules: [
-    //         path.join(__dirname, "src"),
-    //         "node_modules"
-    //     ]
-    // },
 
     module: {
         rules: [
@@ -43,17 +38,24 @@ module.exports = {
                     }
                 }
             },
+
             {
-                test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                use: 'url-loader?limit=10000',
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                })
             },
             {
-                test: /\.(ttf|eot)(\?[\s\S]+)?$/,
-                use: 'file-loader',
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader!sass-loader'
+                })
             },
-            {test: /\.(png|svg|jpg|gif)$/, use: ['file-loader']},
-            {test: /\.css$/, use: ['style-loader', 'css-loader']},
-            {test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader']}
+            {test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: 'url-loader?limit=10000'},
+            {test: /\.(ttf|eot)(\?[\s\S]+)?$/, use: 'file-loader'},
+            {test: /\.(png|svg|jpg|gif)$/, use: ['file-loader']}
         ]
     },
 
@@ -63,6 +65,7 @@ module.exports = {
             title: 'React',
             template: 'index.ejs'
         }),
+        new ExtractTextPlugin( "bundle.css" ),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
             $: 'jquery',
