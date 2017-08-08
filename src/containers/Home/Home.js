@@ -1,43 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ToggleButton from '../../components/ToggleButton/ToggleButton.js';
-import {Grid, Row, Col} from 'react-bootstrap';
+import ToggleButton from '../../components/ToggleButton/ToggleButton';
+import Clock from '../../components/Clock/Clock';
+import NumberList from '../../components/NumberList/NumberList';
+import {Grid, Row, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default {
 
     start() {
         const location = document.getElementById('root');
-
-        class Clock extends React.Component {
-            constructor(props) {
-                super(props);
-                this.state = {date: new Date()};
-            }
-
-            componentDidMount() {
-                this.timerID = setInterval(
-                    () => this.tick(),
-                    1000
-                );
-            }
-
-            componentWillUnmount() {
-                clearInterval(this.timerID);
-            }
-
-            tick() {
-                this.setState({
-                    date: new Date()
-                })
-            }
-
-            render() {
-                return (
-                    <h1>Current time: {this.state.date.toLocaleTimeString()}</h1>
-                )
-            }
-        }
+        const someArray = ['Apple', 2, 3];
 
         class App extends React.Component {
             render() {
@@ -45,10 +18,15 @@ export default {
                     <Grid>
                         <Row>
                             <Col xs={12}>
+                                <h1>Now: <Clock/></h1>
+                            </Col>
+
+                            <Col xs={12}>
                                 <ToggleButton/>
                             </Col>
-                            <Col xs={12}>
-                                <Clock/>
+
+                            <Col xs={6}>
+                                <NumberList list={someArray}/>
                             </Col>
                         </Row>
                     </Grid>

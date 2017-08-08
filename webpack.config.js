@@ -62,8 +62,9 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
+            template: 'index.ejs',
             title: 'React',
-            template: 'index.ejs'
+            favicon: '../favicon.ico'
         }),
         new ExtractTextPlugin( "bundle.css" ),
         new webpack.HotModuleReplacementPlugin(),
