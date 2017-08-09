@@ -1,28 +1,37 @@
 import React, {Component} from 'react';
-import {Button, FormGroup, FormControl, ControlLabel, HelpBlock} from 'react-bootstrap';
+import {Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 
 export default class NameForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
+        this.state = {
+            inputOne: '',
+            textareaOne: ''
+        };
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     getValidationState() {
-        const length = this.state.value.length;
+        const length = this.state.inputOne.length;
         if (length > 10) return 'success';
         else if (length > 5) return 'warning';
         else if (length > 0) return 'error';
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
     handleSubmit(event) {
-        $('#results').text(this.state.value);
+        $('#textareaOne').val(this.state.inputOne);
         event.preventDefault();
     }
 
@@ -34,23 +43,34 @@ export default class NameForm extends Component {
                         controlId="formBasicText"
                         validationState={this.getValidationState()}
                     >
-                        <ControlLabel>Working example with validation</ControlLabel>
+                        <ControlLabel>Input text with validation</ControlLabel>
                         <FormControl
                             type="text"
-                            value={this.state.value}
+                            name="inputOne"
+                            value={this.state.inputOne}
                             placeholder="Enter text"
-                            onChange={this.handleChange}
+                            onChange={this.handleInputChange}
                         />
                         <FormControl.Feedback/>
-                        <HelpBlock>Validation is based on string length.</HelpBlock>
-
-                        <Button type="submit" bsStyle="success">
-                            Submit
-                        </Button>
                     </FormGroup>
-                </form>
 
-                <div id="results"></div>
+                    <FormGroup controlId="formControlsTextarea">
+                        <ControlLabel>Textarea</ControlLabel>
+                        <FormControl
+                            componentClass="textarea"
+                            name="textareaOne"
+                            id="textareaOne"
+                            value={this.state.textareaOne}
+                            placeholder="textarea"
+                            onChange={this.handleInputChange}
+                        />
+                        <FormControl.Feedback/>
+                    </FormGroup>
+
+                    <Button type="submit" bsStyle="success">
+                        Submit
+                    </Button>
+                </form>
             </div>
         )
     }
