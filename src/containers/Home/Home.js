@@ -1,9 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ToggleButton from '../../components/ToggleButton/ToggleButton';
-import Clock from '../../components/Clock/Clock';
-import NumberList from '../../components/NumberList/NumberList';
-import NameForm from '../../components/NameForm/NameForm';
+import React, {Component} from 'react';
+import {render} from 'react-dom';
+import {ToggleButton, Clock, NumberList, NameForm} from '../../components'
 import {Grid, Row, Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -13,7 +10,7 @@ export default {
         const location = document.getElementById('root');
         const someArray = ['Apple', 2, 3];
 
-        class App extends React.Component {
+        class App extends Component {
             render() {
                 return (
                     <Grid>
@@ -43,7 +40,7 @@ export default {
             }
         }
 
-        ReactDOM.render(
+        render(
             <App/>,
             location
         );

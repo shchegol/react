@@ -59,7 +59,6 @@ export default class NameForm extends Component {
                         <FormControl
                             componentClass="textarea"
                             name="textareaOne"
-                            id="textareaOne"
                             value={this.state.textareaOne}
                             placeholder="textarea"
                             onChange={this.handleInputChange}

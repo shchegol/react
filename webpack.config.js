@@ -33,6 +33,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
+                        cacheDirectory: true,
                         presets: ['env'],
                         plugins: ['transform-runtime']
                     }
