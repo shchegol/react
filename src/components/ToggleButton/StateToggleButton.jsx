@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {Button} from 'react-bootstrap';
+import ToggleButton from './ToggleButton.jsx';
 
-export default class ToggleButton extends Component {
+export default class StateToggleButton extends Component {
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true};
         this.handleClick = this.handleClick.bind(this);
+        this.state = {isToggleOn: false};
     }
 
     handleClick() {
@@ -16,9 +16,9 @@ export default class ToggleButton extends Component {
 
     render() {
         return (
-            <Button bsStyle="primary" onClick={this.handleClick}>
+            <ToggleButton onClick={this.handleClick}>
                 {this.state.isToggleOn ? 'ON' : 'OFF'}
-            </Button>
+            </ToggleButton>
         )
     }
 }
