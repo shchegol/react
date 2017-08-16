@@ -1,3 +1,6 @@
-import home from './containers/Home/Home'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {ToDo} from 'containers';
+require('./styles/main.scss');
 
-home.start();
+ReactDOM.render(<ToDo/>, document.getElementById('react-root'));

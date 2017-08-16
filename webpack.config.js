@@ -10,6 +10,13 @@ const jsName = environment === 'production' ? 'bundle-[hash].js' : 'bundle.js';
 
 module.exports = {
     context: path.resolve(__dirname, './src'),
+    resolve: {
+        modules: [
+            'node_modules',
+            path.resolve(__dirname, './src'),
+        ],
+        extensions: ['.js', '.jsx']
+    },
     entry: './client.js',
     output: {
         filename: jsName,
@@ -51,10 +58,13 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader!sass-loader'
-                })
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader"
+                }, {
+                    loader: "sass-loader"
+                }]
             },
             {
                 test: /\.js$/,
