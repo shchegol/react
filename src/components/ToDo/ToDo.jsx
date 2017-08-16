@@ -34,6 +34,12 @@ export default class ToDo extends Component {
     }
 
     addItem(e) {
+        e.preventDefault();
+
+        if (this.ToDoText.value === "") {
+            return;
+        }
+
         const itemArray = this.state.items;
 
         itemArray.push(
@@ -49,7 +55,7 @@ export default class ToDo extends Component {
 
         this.ToDoText.value = "";
 
-        e.preventDefault();
+
     }
 
     render() {
