@@ -8,12 +8,18 @@ import {
 
 class ToDoItem extends React.Component {
     render() {
-        const {ToDoText} = this.props;
+        const todoEntries = this.props.entries;
+
+        function createTasks(item) {
+            return <ListGroupItem key={item.key}>{item.text}</ListGroupItem>
+        }
+
+        const listItems = todoEntries.map(createTasks);
 
         return (
-            <ListGroupItem>
-                {ToDoText}
-            </ListGroupItem>
+            <ListGroup id="todoList">
+                {listItems}
+            </ListGroup>
         );
     }
 }
@@ -21,43 +27,48 @@ class ToDoItem extends React.Component {
 export default class ToDo extends Component {
     constructor(props) {
         super(props);
-        this.handleInputChange = this.handleInputChange.bind(this);
         this.addItem = this.addItem.bind(this);
         this.state = {
-            value: '',
             items: []
         };
     }
 
-    handleInputChange(event) {
-        this.setState({
-            value: event.target.value
-        });
-    }
+    addItem(e) {
+        const itemArray = this.state.items;
 
-    addItem() {
-        const { items } = this.state;
-        this.setState({ items: [ ...items, { count: 0 } ] });
+        itemArray.push(
+            {
+                text: this.ToDoText.value,
+                key: Date.now()
+            }
+        );
+
+        this.setState({
+            items: itemArray
+        });
+
+        this.ToDoText.value = "";
+
+        e.preventDefault();
     }
 
     render() {
-        const { items, value } = this.state;
-        const { addItem } = this;
+        const {items} = this.state;
+        const {addItem} = this;
 
         return (
             <Row className="mt_2">
-                <form>
+                <form onSubmit={addItem}>
                     <Col xs={12}>
                         <FormGroup controlId="formBasicText">
                             <InputGroup>
                                 <FormControl
                                     type="text"
-                                    name="todoInput"
+                                    inputRef={input => this.ToDoText = input}
                                     placeholder="Введите что нужно сделать"
-                                    onChange={this.handleInputChange}
                                 />
                                 <InputGroup.Button>
-                                    <Button type="button" bsStyle="success" onClick={addItem}>
+                                    <Button type="submit" bsStyle="success">
                                         Добавить в список
                                     </Button>
                                 </InputGroup.Button>
@@ -67,9 +78,8 @@ export default class ToDo extends Component {
                 </form>
 
                 <Col xs={12} className="mt_2">
-                    <ListGroup id="todoList">
-                        { items.map( (item, i) => <ToDoItem key={i} ToDoText={value}/> ) }
-                    </ListGroup>
+                    <p>Невыполненных заданий: {items.length}</p>
+                    <ToDoItem entries={items}/>
                 </Col>
             </Row>
         )
