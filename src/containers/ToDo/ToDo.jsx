@@ -8,7 +8,7 @@ export default class Home extends Component {
             <Grid>
                 <Row>
                     <Col xs={12}>
-                        <h1>Todo list</h1>
+                        <h1>Список задач</h1>
                     </Col>
                 </Row>
 

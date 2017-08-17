@@ -1,3 +1,6 @@
-@import 'pages/todo',
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap.scss",
+'vendors/bootstrap/variables',
+'vendors/bootstrap/bootwatch',
 'base/modificators'
 ;

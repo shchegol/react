@@ -1,20 +1,26 @@
 import React, {Component} from 'react';
 import {
     Row, Col,
-    Button,
-    FormGroup, FormControl, InputGroup, ControlLabel,
+    FormGroup, FormControl, HelpBlock,
     ListGroup, ListGroupItem
 } from 'react-bootstrap';
 
-class ToDoItem extends React.Component {
+class Items extends React.Component {
+    itemClicked(text) {
+        console.log(text);
+    }
+
     render() {
-        const todoEntries = this.props.entries;
-
-        function createTasks(item) {
-            return <ListGroupItem key={item.key}>{item.text}</ListGroupItem>
-        }
-
-        const listItems = todoEntries.map(createTasks);
+        let todoEntries = this.props.entries;
+        let listItems = todoEntries.map((item) => {
+                const text = item.text;
+                return (
+                    <ListGroupItem key={item.key} onClick={this.itemClicked.bind(this, text)}>
+                        {item.text}
+                    </ListGroupItem>
+                )
+            }
+        );
 
         return (
             <ListGroup id="todoList">
@@ -27,65 +33,77 @@ class ToDoItem extends React.Component {
 export default class ToDo extends Component {
     constructor(props) {
         super(props);
+        this.handleChange = this.handleChange.bind(this);
         this.addItem = this.addItem.bind(this);
         this.state = {
+            value: '',
+            validationState: null,
+            validationMessage: '',
             items: []
         };
     }
 
+    handleChange(e) {
+        this.setState({
+            value: e.target.value
+        })
+    }
+
     addItem(e) {
         e.preventDefault();
+        const length = this.state.value.length;
 
-        if (this.ToDoText.value === "") {
+        if (!length) {
+            this.setState({
+                validationState: "error",
+                validationMessage: "Впишите задачу"
+            });
             return;
         }
 
         const itemArray = this.state.items;
 
-        itemArray.push(
-            {
-                text: this.ToDoText.value,
-                key: Date.now()
-            }
-        );
-
-        this.setState({
-            items: itemArray
+        itemArray.push({
+            text: this.state.value,
+            key: Date.now()
         });
 
-        this.ToDoText.value = "";
-
-
+        this.setState({
+            items: itemArray,
+            value: "",
+            validationState: null,
+            validationMessage: ""
+        });
     }
 
     render() {
-        const {items} = this.state;
-        const {addItem} = this;
+        const {value, items, validationState, validationMessage} = this.state;
+        const {addItem, handleChange} = this;
 
         return (
             <Row className="mt_2">
                 <form onSubmit={addItem}>
                     <Col xs={12}>
-                        <FormGroup controlId="formBasicText">
-                            <InputGroup>
-                                <FormControl
-                                    type="text"
-                                    inputRef={input => this.ToDoText = input}
-                                    placeholder="Введите что нужно сделать"
-                                />
-                                <InputGroup.Button>
-                                    <Button type="submit" bsStyle="success">
-                                        Добавить в список
-                                    </Button>
-                                </InputGroup.Button>
-                            </InputGroup>
+                        <FormGroup
+                            controlId="formBasicText"
+                            validationState={validationState}
+                        >
+
+                            <FormControl
+                                type="text"
+                                value={value}
+                                onChange={handleChange}
+                                placeholder="Что нужно сделать"
+                            />
+
+                            <HelpBlock>{validationMessage}</HelpBlock>
                         </FormGroup>
                     </Col>
                 </form>
 
-                <Col xs={12} className="mt_2">
+                <Col xs={12} className="mt">
                     <p>Невыполненных заданий: {items.length}</p>
-                    <ToDoItem entries={items}/>
+                    <Items entries={items}/>
                 </Col>
             </Row>
         )

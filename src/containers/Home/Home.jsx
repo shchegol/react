@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {ToggleButton, Clock, NumberList, NameForm} from 'components'
 import {Grid, Row, Col} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
 
 const someArray = ['Apple', 2, 3];
 
