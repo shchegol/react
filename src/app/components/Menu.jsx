@@ -14,7 +14,7 @@ export default class Menu extends Component {
         });
 
         return (
-            <Navbar inverse>
+            <Navbar inverse fluid fixedTop>
                 <Navbar.Header>
                     <Navbar.Brand>
                         {this.props.brand}

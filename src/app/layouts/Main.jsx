@@ -3,7 +3,7 @@ import {Grid, Row, Col} from 'react-bootstrap';
 import axios from 'axios';
 
 import Menu from '../components/Menu';
-import Articles from '../components/Articles';
+import Article from '../components/Article';
 import Footer from '../components/Footer';
 
 export default class Main extends Component {
@@ -38,36 +38,41 @@ export default class Main extends Component {
 
     render() {
         return (
-            <Grid>
-                {
-                    this.state.isReady
-                        ?
-                        <div>
-                            <Menu brand={this.brand} items={this.items}/>
+            this.state.isReady
+                ?
 
-                            <Row>
-                                <Col xs={12}>
-                                    <h1>{this.brand}</h1>
-                                </Col>
-                            </Row>
+                <Grid>
+                    <Menu brand={this.brand} items={this.items}/>
 
-                            <Row>
-                                <Col xs={12}>
-                                    <Articles articles={this.articles}/>
-                                </Col>
-                            </Row>
+                    <Row>
+                        <Col xs={12}>
+                            <h1>{this.brand}</h1>
+                        </Col>
+                    </Row>
 
-                            <Footer/>
-                        </div>
-                        :
-                        <div>
+                    <Article articles={this.articles}/>
+
+                    <Row>
+                        <Col xs={12}>
+                            <Footer>
+                                Footer
+                            </Footer>
+                        </Col>
+                    </Row>
+                </Grid>
+
+                :
+
+                <Grid>
+                    <Row>
+                        <Col xs={12}>
                             <h1 className="text-center mt_2">
                                 Loading...
                             </h1>
-                        </div>
+                        </Col>
+                    </Row>
+                </Grid>
 
-                }
-            </Grid>
         )
     }
 }

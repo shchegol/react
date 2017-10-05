@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import {Navbar} from 'react-bootstrap';
 
 export default class Footer extends Component {
     constructor(props) {
@@ -8,9 +7,9 @@ export default class Footer extends Component {
 
     render() {
         return (
-            <div>
-                Footer
-            </div>
+            <footer>
+                {this.props.children}
+            </footer>
         )
     }
 }
