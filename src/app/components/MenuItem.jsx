@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {NavItem} from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class MenuItem extends Component {
     constructor(props) {
@@ -8,9 +8,11 @@ export default class MenuItem extends Component {
 
     render() {
         return (
-            <NavItem active={this.props.active}  href="#">
-                {this.props.name}
-            </NavItem>
+            <li className={ this.props.active ? "active" : "" }>
+                <Link to={ this.props.href }>
+                    { this.props.children }
+                </Link>
+            </li>
         )
     }
 }

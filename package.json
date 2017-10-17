@@ -47,10 +47,12 @@
     "babel-preset-stage-0": "^6.24.1",
     "bootstrap-sass": "^3.3.7",
     "express": "^4.15.4",
+    "history": "^4.7.2",
     "jquery": "^3.2.1",
     "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2"
   }
 }

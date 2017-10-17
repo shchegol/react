@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
-
-import MenuItem from './MenuItem'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
 
 export default class Menu extends Component {
     constructor(props) {
@@ -9,21 +8,19 @@ export default class Menu extends Component {
     }
 
     render() {
-        let items = this.props.items.map((item, index) => {
-            return <MenuItem key={index} name={item.name} active={item.isActive}/>
-        });
-
         return (
             <Navbar inverse fluid fixedTop>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        {this.props.brand}
+                        <Link to="/">
+                            { this.props.brand }
+                        </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        {items}
+                        { this.props.children }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
