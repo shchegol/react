@@ -3,18 +3,18 @@ import React, { Component } from 'react';
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
 
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 
 export default class Layout extends Component {
     constructor(props) {
         super(props);
 
-        this.brand = "Brand name";
+        this.brand = "React articles";
         this.items = [{
-            name: "Главная",
+            name: "Articles page",
             isActive: true
         }, {
-            name: "Страница 1",
+            name: "Some page",
             isActive: false
         }];
     }

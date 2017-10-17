@@ -11,7 +11,6 @@ export default class MenuItem extends Component {
             <NavItem active={this.props.active}  href="#">
                 {this.props.name}
             </NavItem>
-
         )
     }
 }

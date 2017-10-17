@@ -9,6 +9,13 @@ body {
   }
 }
 
+.mb {
+  margin-bottom: 1rem;
+  &_2 {
+    margin-bottom: 2rem;
+  }
+}
+
 .text {
   &_center {
     text-align: center;

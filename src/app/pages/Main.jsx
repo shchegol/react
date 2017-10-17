@@ -10,7 +10,7 @@ export default class Main extends Component {
     render() {
         return (
             <div>
-                <Title title={ 'Главная страница' }/>
+                <Title title={ 'Articles page' }/>
                 <Articles/>
             </div>
         )
