@@ -10,7 +10,7 @@ export default class Footer extends Component {
         return (
             <footer>
                 <Row>
-                    <Col xs={ 12 }>
+                    <Col bsClass="mt mb_2 col" xs={ 12 }>
                         { this.props.children }
                     </Col>
                 </Row>

@@ -103,7 +103,7 @@ export default class Articles extends Component {
                             "Loading articles..."
                     }
 
-                    <Modal show={ this.state.showModal }>
+                    <Modal show={this.state.showModal} onHide={this.hideModal}>
                         <Modal.Header>
                             <Modal.Title>Add new article</Modal.Title>
                         </Modal.Header>
@@ -114,7 +114,7 @@ export default class Articles extends Component {
                                     <ControlLabel>Title</ControlLabel>
                                     <FormControl
                                         type="text"
-                                        placeholder="Заголовок статьи"
+                                        placeholder="Article title"
                                         inputRef={ (ref) => {
                                             this.inputTitle = ref
                                         } }
@@ -125,7 +125,7 @@ export default class Articles extends Component {
                                     <ControlLabel>Text</ControlLabel>
                                     <FormControl
                                         type="text"
-                                        placeholder="Введите текст"
+                                        placeholder="Article text"
                                         inputRef={ (ref) => {
                                             this.inputBody = ref
                                         } }

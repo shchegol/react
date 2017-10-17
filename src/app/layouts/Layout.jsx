@@ -27,7 +27,7 @@ export default class Layout extends Component {
                 { this.props.children }
 
                 <Footer>
-                    Footer
+                    &copy; 2017 Alexander Shchegol
                 </Footer>
             </Grid>
         )
