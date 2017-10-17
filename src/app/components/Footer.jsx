@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 export default class Footer extends Component {
     constructor(props) {
@@ -8,7 +9,11 @@ export default class Footer extends Component {
     render() {
         return (
             <footer>
-                {this.props.children}
+                <Row>
+                    <Col xs={ 12 }>
+                        { this.props.children }
+                    </Col>
+                </Row>
             </footer>
         )
     }

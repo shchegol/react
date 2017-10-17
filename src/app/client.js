@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './layouts/Main'
+import Layout from './layouts/Layout'
+import Main from './pages/Main'
 import './styles/main.scss';
 
-ReactDOM.render(<Main/>, document.getElementById('react-root'));
+const app = document.getElementById('react-root');
+
+ReactDOM.render(
+    <Layout>
+        <Main/>
+    </Layout>,
+    app);

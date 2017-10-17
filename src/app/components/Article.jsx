@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import {Row, Col} from 'react-bootstrap';
-import Articles from './Articles';
+import React, { Component } from 'react';
+import { Media } from 'react-bootstrap';
 
 export default class Article extends Component {
     constructor(props) {
@@ -8,16 +7,22 @@ export default class Article extends Component {
     }
 
     render() {
-        let articles = this.props.articles.map((article, index) => {
-            return <Articles key={index} {...article}/>
-        });
-
         return (
-            <Row>
-                <Col xs={12}>
-                    {articles}
-                </Col>
-            </Row>
+            <Media>
+                <Media.Left>
+                    { this.props.userId }
+                </Media.Left>
+                <Media.Body>
+                    <Media.Heading>
+                        <a href="#">
+                            { this.props.title }
+                        </a>
+                    </Media.Heading>
+                    <p>
+                        { this.props.body }
+                    </p>
+                </Media.Body>
+            </Media>
         )
     }
 }
