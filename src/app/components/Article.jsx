@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import { Media } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Media, Button, Glyphicon } from 'react-bootstrap';
 
 export default class Article extends Component {
     constructor(props) {
         super(props);
+
+        this.like = this.like.bind(this)
+    }
+
+    like() {
+        this.props.like(this.props.id);
     }
 
     render() {
@@ -21,8 +28,25 @@ export default class Article extends Component {
                     <p>
                         { this.props.body }
                     </p>
+                    <Button bsStyle="primary" bsSize="xsmall" onClick={ this.like }>
+                        <Glyphicon glyph="heart" /> { this.props.likes }
+                    </Button>
                 </Media.Body>
+
+                <hr/>
             </Media>
         )
     }
 }
+
+Article.defaultProps = {
+    likes: 0,
+    body: ''
+};
+
+Article.propTypes = {
+    likes: PropTypes.number,
+    userId: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string
+};
