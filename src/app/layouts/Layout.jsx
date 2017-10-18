@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Main from '../pages/Main';
 import Comments from '../pages/Comments';
@@ -15,14 +15,6 @@ export default class Layout extends Component {
         super(props);
 
         this.brand = "React articles";
-        this.items = [{
-            name: "Articles page",
-            isActive: true
-        }, {
-            name: "Comments",
-        }, {
-            name: "Users",
-        }];
     }
 
     render() {
@@ -44,6 +36,7 @@ export default class Layout extends Component {
                     <Route exact path='/' component={Main}/>
                     <Route path='/Comments' component={Comments}/>
                     <Route path='/Users' component={Users}/>
+                    <Redirect to="/" />
                 </Switch>
 
                 <Footer>
